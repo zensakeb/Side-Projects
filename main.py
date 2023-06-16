@@ -1,26 +1,42 @@
+from typing import Dict
 import numpy as np
 import random
 
-b = np.zeros(3,int)
+class CommonInteger:
+    NEG_ONE = -1
+    ZERO = 0
+    ONE = 1
+    TWO = 2
+    THREE = 3
+
+NUMBER_OF_ELEMENTS_PER_ROW_IN_A_BOX = CommonInteger.THREE
+
+# single letter variable not allowed: dorkar hoile sentence lekhbi
+# use of magic number detected: Google clean code and how to solve magic numbers
+b = np.zeros(NUMBER_OF_ELEMENTS_PER_ROW_IN_A_BOX,int)
 a = np.arange(1,4)
 # box = np.array([a,a+3,a+6])
+
+# try to come up with a bettr name for 'box'
 box = np.array([b,b,b])
 lines = np.array([box,box,box])
 board = np.array([lines,lines,lines])
 # board = np.array([[[[5,3,0],[6,0,0],[0,9,8]],[[0,7,0],[1,9,5],[0,0,0]],[[0,0,0],[0,0,0],[0,6,0]]],[[[8,0,0],[4,0,0],[7,0,0]],[[0,6,0],
 #                 [8,0,3],[0,2,0]],[[0,0,3],[0,0,1],[0,0,6]]],[[[0,6,0],[0,0,0],[0,0,0]],[[0,0,0],[4,1,9],[0,8,0]],[[2,8,0],[0,0,5],[0,7,9]]]])
 
-max_num_dict = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+max_num_dict : Dict = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
 max_num = []
 win_lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-def takeInput():
+# Python annotation: return type missing
+def takeInput() -> None:
 
+    # too many nested layers of loop... break into mutliple method/function
     z = 1
     for r in range(3):
         for c in range(3):
             i = 0
-            input_box = [int(x) for x in input(f'Box-{z} : ').split()]
+            input_box = [int(x) for x in input(f'Box-{z} : ').split()] # one of my favorite python syntax : list comprehension : +1 point
             z+= 1
             for x in range(3):
                 for y in range(3):
@@ -28,10 +44,11 @@ def takeInput():
                     i += 1
 
 def max_num_sort():
-    ax = dict(sorted(max_num_dict.items(), key=lambda x:x[1], reverse= True))
+    ax = dict(sorted(max_num_dict.items(), key=lambda x:x[1], reverse= True)) # na jaina code lekhar theika chaakri chaira dewa bhala : functional interface
     for k in ax.keys():
         max_num.append(k)
 
+# method naming convention error
 def printBoard():
     print()
     string = ''
